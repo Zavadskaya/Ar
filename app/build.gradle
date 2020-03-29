@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.google.ar.sceneform.plugin'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 29
@@ -29,7 +29,14 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+    packagingOptions {
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE-FIREBASE.txt'
+        exclude 'META-INF/NOTICE'
+    }
 }
 
 
@@ -48,11 +55,11 @@ dependencies {
     implementation 'com.google.ar.sceneform:core:1.15.0'
     implementation 'com.google.ar:core:1.16.0'
     implementation 'com.google.android.material:material:1.1.0'
+    implementation 'com.google.firebase:firebase-core:17.2.3'
+    implementation 'com.google.firebase:firebase-storage:19.1.1'
 
-
-    sceneform.asset('sampledata/model.fbx',
-            'default',
-            'sampledata/model.sfa',
-            'src/main/res/raw/model')
-
+    sceneform.asset('sampledata/augmented_video_model.obj',
+            'sampledata/augmented_video_material.mat',
+            'sampledata/augmented_video_model.sfa',
+            'src/main/res/raw/augmented_video_model')
 }
